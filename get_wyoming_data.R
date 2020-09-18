@@ -243,12 +243,12 @@ create_mean_vertical_profile <- function(sounding_data, timesteps, min_height, p
 #         If you already downloaded and saved the monthly file, you can just read it from the disk
 
 # Set the correct working directory if you want to save the data.
-setwd("G:/15 InCityTakeOff/AbuDhabi")
+setwd("/opt/ARW/DATA/MEAS/UWYO/wyoming_radiosonde/")
 
 
-abu_dhabi <-  get_months_wyoming(2010, 1:2, "mideast", 41217, write_monthly = FALSE, write_daily = FALSE)
-berlin    <-  get_months_wyoming(2010, 1:3, "europe",  10393, write_monthly = FALSE, write_daily = FALSE,
-                                 read_monthly_from_file = T)
+# abu_dhabi <-  get_months_wyoming(2010, 1:2, "mideast", 41217, write_monthly = FALSE, write_daily = FALSE)
+berlin    <-  get_months_wyoming(2010, 6:7, "europe",  10393, write_monthly = TRUE, write_daily =TRUE,
+                                 read_monthly_from_file = TRUE)
 
 
 # create_mean_vertical_profile needs following input
@@ -264,13 +264,13 @@ berlin    <-  get_months_wyoming(2010, 1:3, "europe",  10393, write_monthly = FA
 #         Berlin is 115
 #         Abu Dhabi is 27
 
-abu_dhabi_10 <- create_mean_vertical_profile(abu_dhabi, 12, 27, parameter = "THTA")
+# abu_dhabi_10 <- create_mean_vertical_profile(abu_dhabi, 12, 27, parameter = "THTA")
 
 # simple example plot
-ggplot(abu_dhabi_10, aes(y = theta, x = height ))+
-  geom_path() + 
-  geom_ribbon(aes(ymin = theta-std, ymax = theta+std))+
-  coord_flip()
+# ggplot(abu_dhabi_10, aes(y = theta, x = height ))+
+#  geom_path() + 
+#  geom_ribbon(aes(ymin = theta-std, ymax = theta+std))+
+#  coord_flip()
 
 # You can select every variable available
 names(berlin$january$`1_0`)
@@ -286,19 +286,10 @@ ggplot(berlin_10, aes(y = theta, x = height )) +
 
 # Write as CSV file:
 
-write.csv2(abu_dhabi_10, "abu_dhabi_mean.csv", quote = F, row.names = F)
+# write.csv2(abu_dhabi_10, "abu_dhabi_mean.csv", quote = F, row.names = F)
 
 
-abu_dhabi_small <- abu_dhabi_10 %>% 
-  filter(height<1500)
+# abu_dhabi_small <- abu_dhabi_10 %>% 
+#  filter(height<1500)
 
-write.csv2(abu_dhabi_small, "abu_dhabi_mean_mean_1500.csv", quote = F, row.names = F)
-
-
-
-
-
-
-
-
-
+# write.csv2(abu_dhabi_small, "abu_dhabi_mean_mean_1500.csv", quote = F, row.names = F)
